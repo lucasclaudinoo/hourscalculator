@@ -1,0 +1,65 @@
+<html>
+<head>
+<script>
+function calcular() {
+
+
+  let tasks = document.getElementById("tasks").value;
+
+  let totalPoints = 0;
+
+  tasks.split("\n").forEach(function(task) {
+    if (task.startsWith("(")) {
+      let points = parseInt(task.split(")")[0].slice(1));
+      totalPoints += points;
+    }
+  });
+
+  console.log(`Total de pontos: ${totalPoints}`);
+
+  let devs = document.getElementById("devs").value;
+
+  console.log("Número de devs: " + devs);
+
+  let est = document.getElementById("est").value;
+
+  console.log("Número de estagiários: " + est);
+
+  let desc = document.getElementById("desc").value;
+
+  let hotasTrabalhadas = ( devs * 8 + est * 6 ) * 10;
+
+  let horasTotais = hotasTrabalhadas - desc;
+
+  let separar = document.getElementById("separar").checked;
+
+  console.log(separar)
+  
+
+  document.write(`<p>Total de pontos: ${totalPoints}</p>`);
+  document.write(`<p>Número de devs: ${devs}</p>`);
+  document.write(`<p>Número de estagiários: ${est}</p>`);
+  document.write(`<p>Horas trabalhadas: ${hotasTrabalhadas}</p>`);
+  document.write(`<p>Horas descontadas: ${desc}</p>`);
+  document.write('<p>Proporção de horas trabalhadas em porcentagem: ' + (totalPoints / horasTotais* 100).toFixed(2) + '%</p>')
+  document.write('<p>Voltar para o formulário: <a href="html.html">Voltar</a></p>')
+  
+}
+</script>
+</head>
+<body>
+<!---botão que separa as tasks e cria dois text area-->
+<p>Deseja separar as atividades ?</p>
+<input type="checkbox" id="separar" onclick="separar()">
+<p>Digite as atividades:</p>
+<textarea id="tasks" rows="10" cols="50"></textarea>
+<p>Digite o número de devs:</p>
+<input type="number" id="devs">
+<p>Digite o número de estagiários:</p>
+<input type="number" id="est">
+<p>Digite as horas descontadas:</p>
+<input type="number" id="desc">
+<button onclick="calcular()">Calcular</button>
+<button onclick="window.location.reload()">Limpar</button>
+</body>
+</html>
